@@ -4,6 +4,8 @@ import anthropic
 from dotenv import load_dotenv
 import re
 
+from datetime import datetime
+
 
 def create_and_return_client():
     load_dotenv()
@@ -13,6 +15,7 @@ def create_and_return_client():
 
 
 def send_message_to_api_and_return_request(_system_message, _prompt, _model, _temperature):
+    time_start = datetime.now()
     client = create_and_return_client()
     message = client.messages.create(
         model=_model,
@@ -23,6 +26,7 @@ def send_message_to_api_and_return_request(_system_message, _prompt, _model, _te
             {"role": "user", "content": _prompt}
         ]
     )
-    result_message = message.content[0].text
+    time_end = datetime.now()
+    time_result = time_end - time_start
+    result_message = {message.content[0].text, time_result}
     return result_message
-

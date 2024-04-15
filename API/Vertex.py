@@ -1,6 +1,7 @@
 import vertexai
 from vertexai.language_models import CodeChatModel, TextGenerationModel
 from vertexai.preview.generative_models import GenerativeModel
+from datetime import datetime
 
 
 def create_and_return_client():
@@ -22,7 +23,9 @@ def send_message_to_api_and_return_request(_system_message, _prompt, _model, _te
     return response
 
 
-def send_message_to_api_and_return_request_gemini( _prompt, _temperature):
+def send_message_to_api_and_return_request_gemini(_prompt, _temperature):
+    time_start = datetime.now()
+
     create_and_return_client()
     parameters = {
         "temperature": _temperature,
@@ -31,8 +34,12 @@ def send_message_to_api_and_return_request_gemini( _prompt, _temperature):
         "top_k": 40
     }
     model = GenerativeModel("gemini-1.5-pro-preview-0409")
+
     message = model.generate_content([_prompt])
-    response = message.text
+    time_end = datetime.now()
+    time_result = time_end - time_start
+    response = {message.text, time_result}
+
     return response
 
 
@@ -51,5 +58,3 @@ def send_message_to_api_and_return_request_code(_system_message, _prompt, _model
     message = chat.send_message(_prompt, **parameters)
     response = message.text
     return response
-
-
