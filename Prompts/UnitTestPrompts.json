@@ -1,5 +1,10 @@
 {
   "prompts": {
+    "small_prompt": "Write a batch job in the programming Language X++, commonly known as Dynamics AX, the function of the batch job is described below:The class above updates records in a table called JunTrainingTable2 where the EndDate is before today and the Completed field is false, setting the Completed field to true. It then displays a message indicating the number of records that were updated or a warning if no records were updated. \n ",
+    "medium_prompt": "",
+    "large_prompt": ""
+  },
+  "system_message": {
     "small_prompt": "",
     "medium_prompt": "",
     "large_prompt": ""
