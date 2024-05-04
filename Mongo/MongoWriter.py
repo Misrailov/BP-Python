@@ -13,7 +13,7 @@ def get_database():
     return client["bp_py"]
 
 
-def create_item(_category, _prompt_length, _prompt, _result, _total_time, _model):
+def create_item(_category, _prompt_length, _prompt, _result, _total_time, _model,_size:str):
     db_name = get_database()
     collection_name = db_name["results"]
     item = {
@@ -21,10 +21,10 @@ def create_item(_category, _prompt_length, _prompt, _result, _total_time, _model
         "prompt_length": _prompt_length,
         "prompt": _prompt,
         "result": _result,
-        "total_time": _total_time,
-        "model":_model
+        "total_time": str(_total_time),
+        "model": _model,
+        "size": _size
     }
     collection_name.insert_one(item)
-
 
 #create_item("test1", "test1", "test1", "test1")
