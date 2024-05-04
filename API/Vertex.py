@@ -38,7 +38,7 @@ def send_message_to_api_and_return_request_gemini(_prompt, _temperature):
     message = model.generate_content([_prompt])
     time_end = datetime.now()
     time_result = time_end - time_start
-    response = {message.text, time_result}
+    response = {"res" :message.text, "time_res": time_result.seconds}
 
     return response
 

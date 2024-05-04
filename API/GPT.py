@@ -19,6 +19,7 @@ def send_message_to_api_and_return_request(_system_message, _prompt, _model, _te
     message = client.chat.completions.create(
         model=_model,
         temperature=_temperature,
+        max_tokens=4096,
         messages=[
             {"role": "system", "content": _system_message},
             {"role": "user", "content": _prompt}
@@ -27,5 +28,5 @@ def send_message_to_api_and_return_request(_system_message, _prompt, _model, _te
 
     time_end = datetime.now()
     time_result = time_end - time_start
-    result_message = {message.choices[0].message.content,time_result}
+    result_message = {"res" : message.choices[0].message.content, "time_res": time_result.seconds}
     return result_message

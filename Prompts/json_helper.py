@@ -4,11 +4,16 @@ from enum import Enum
 # json_file = ""
 
 
-# with open('./BatchJobsPrompts.json') as json_data:
+# with open('./BatchJobsPrompts.py') as json_data:
 #     json_file = json.load(json_data)
 #
 # print(json_file["prompts"]["small_prompt"])
+from . import BatchJobsPrompts
 
+
+from . import ATLPrompts
+from . import DisplayFunctionPrompts
+from . import UnitTestPrompts
 class PromptType(Enum):
     SMALL_PROMPT = "small_prompt"
     MEDIUM_PROMPT = "medium_prompt"
@@ -18,21 +23,18 @@ class PromptType(Enum):
     SYSTEM_LARGE_PROMPT = "system_large_prompt"
 
 
-class TestType(Enum):
-    ATL_PROMPT = "ATLPROMPTS"
-    BATCH_JOBS_PROMPT = "BATCHJOBSPROMPTs"
-    DISPLAY_FUNCTION_PROMPT = "DISPLAYFUNCTIONPROMPTS"
-    UNIT_TEST_PROMPT = "UNITTESTPROMPTS"
 
 
-def return_json_information(promptType: PromptType, testType: TestType):
-    json_file: str
-    with open(f"./{testType.value}.json") as json_data:
-        json_file = json.load(json_data)["prompts"][promptType.value]
-    print(json_file)
-    return json_file
+
+def return_json_information_batch(promptType: PromptType):
+    return BatchJobsPrompts.prompts[promptType.value]
+def return_json_information_atl(promptType: PromptType):
+    return ATLPrompts.prompts[promptType.value]
+def return_json_information_dp(promptType: PromptType):
+    return DisplayFunctionPrompts.prompts[promptType.value]
+def return_json_information_ut(promptType: PromptType):
+    return UnitTestPrompts.prompts[promptType.value]
 
 
-return_json_information(PromptType.SMALL_PROMPT, TestType.BATCH_JOBS_PROMPT)
 
 

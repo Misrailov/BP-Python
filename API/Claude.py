@@ -28,5 +28,5 @@ def send_message_to_api_and_return_request(_system_message, _prompt, _model, _te
     )
     time_end = datetime.now()
     time_result = time_end - time_start
-    result_message = {message.content[0].text, time_result}
+    result_message = {"res" :message.content[0].text, "time_res": time_result.seconds}
     return result_message
